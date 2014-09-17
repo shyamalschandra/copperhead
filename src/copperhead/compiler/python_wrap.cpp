@@ -6,7 +6,6 @@ using std::vector;
 using std::shared_ptr;
 using std::make_shared;
 using std::static_pointer_cast;
-using std::move;
 using backend::utility::make_vector;
 
 namespace backend {
@@ -107,8 +106,8 @@ python_wrap::result_type python_wrap::operator()(const procedure &n) {
         
         shared_ptr<const procedure> result = make_shared<const procedure>(
             n.id().ptr(),
-            make_shared<const tuple>(move(wrapper_args)),
-            make_shared<const suite>(move(stmts)),
+            make_shared<const tuple>(std::move(wrapper_args)),
+            make_shared<const suite>(std::move(stmts)),
             n.type().ptr(),
             proc_p_ctype,
             "");
